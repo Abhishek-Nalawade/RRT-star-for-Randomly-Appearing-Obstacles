@@ -3,9 +3,7 @@ import cv2
 import math
 import random
 
-#out = cv2.VideoWriter('Exploration.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 60, (400,300))
-#out = cv2.VideoWriter('Output.mp4',cv2.VideoWriter_fourcc(*'mp4v'), 60, (400,300))
-
+out = cv2.VideoWriter('rrt_star.mp4',cv2.VideoWriter_fourcc(*'mp4v'), 60, (400,300))
 
 
 # def obstacles(st,canvas_size, canvas, duplicate_canvas):
@@ -321,6 +319,7 @@ def connect_child_and_closest_point(child, closest_point, canvas_size, canvas, d
     visited_child_list.append(child)
     visited_parent_list.append(closest_point)
     cv2.imshow("final",canvas)
+    out.write(canvas)
     cv2.waitKey(1)
     #print("its conversion: ",child)
     return child
@@ -472,12 +471,13 @@ def moving_robot(path, canvas_size, canvas, duplicate_canvas, cost_and_theta_can
             canvas_diff[canvas_diff[:,:,1]<0] = -255
             canvas_diff[canvas_diff[:,:,2]<0] = -255
             canvas = canvas - canvas_diff
-            cv2.imshow("canvas_before",canvas)
+            #cv2.imshow("canvas_before",canvas)
 
-            cv2.circle(canvas, (new_x,(canvas_size[0]-1)-new_y), 1, (128,128,128), 5)
+            cv2.circle(canvas, (new_x,(canvas_size[0]-1)-new_y), 1, (220,220,220), 5)
             previous_canvas = canvas.copy()
             cv2.imshow("final",canvas)
-            cv2.imshow("diff",canvas_diff)
+            out.write(canvas)
+            #cv2.imshow("diff",canvas_diff)
             cv2.waitKey(1)
             current = [new_y,new_x]
 
@@ -638,6 +638,7 @@ def RRT_star(start1, goal1, canvas_size, main_canvas1, main_duplicate_canvas1, s
     random_point_radius = 10
     #action_set = [[rpm1,0],[0,rpm1],[rpm1,rpm1],[rpm2,0],[0,rpm2],[rpm2,rpm2],[rpm1,rpm2],[rpm2,rpm1]]
     canvas = np.zeros((canvas_size[0], canvas_size[1], canvas_size[2]))
+    canvas = canvas.astype(np.uint8)
     duplicate_canvas = np.zeros((canvas_size[0], canvas_size[1], canvas_size[2]))
     cost_and_theta_canvas = np.zeros((canvas_size[0], canvas_size[1], 2))
     goal_canvas = np.zeros((canvas_size[0], canvas_size[1], 1))
