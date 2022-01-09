@@ -11,12 +11,12 @@ Graduate Student of M.Eng Robotics at University of Maryland.
 Graduate Student of M.Eng Robotics at University of Maryland. 
 
 ## Test Case:
-For a test case you can try
+For a test case try the coordinates:
 
-Start x coordinate: 10
+Start x coordinate: 10\
 Start y coordinate: 10
 
-Goal x coordinate: 100
+Goal x coordinate: 100\
 Goal y coordinate: 180
 
 ## Result:
